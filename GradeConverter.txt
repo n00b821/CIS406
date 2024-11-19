@@ -1,0 +1,75 @@
+package gradeConverter;
+
+// Aaron J. Langley
+// CIS 406 Java Programming I
+// GradeConverter program
+
+import java.util.Scanner;
+
+public class GradeConverter {
+	
+	//Setup scores to convert
+	public char convertScore(int score) 
+	{
+		if (score >= 90)
+		{
+			return 'A';
+		}
+		else if (score >= 80)
+		{
+			return 'B';
+		}
+		else if (score >= 70)
+		{
+			return 'C';
+		}
+		else if (score >= 60)
+		{
+			return 'D';
+		}
+		else 
+		{
+			return 'F';
+		}
+	}
+
+	public static void main(String[] args) {
+		
+		// Welcome statement
+		System.out.println("Welcome to the Letter Grade Converter!\n");
+		
+		// Setup an instance of GradeConverter
+		GradeConverter myConverter = new GradeConverter();
+		
+		Scanner input = new Scanner(System.in);
+		
+		// Numeric grade input
+		// Get the numeric scores and convert them to corresponding letter grade
+		char keepGoing = 'y';
+		while (keepGoing != 'n' && keepGoing != 'N')
+		{
+			System.out.println("Enter a numeric score: ");
+			int number = input.nextInt();
+		
+			while (number < 0 || number > 100)
+			{
+				System.out.println("Invalid number. Score must be between 0 and 100.");
+				System.out.println("Enter a numeric grade: ");
+				number = input.nextInt();				
+			}
+		
+		char grade = myConverter.convertScore(number);
+		
+		System.out.println("Letter grade: " + grade);
+		System.out.println("Continue? (y/n): ");
+		keepGoing = input.next().charAt(0);
+		}
+		//Close input
+		input.close();
+		System.out.println("\nBye!!");
+		
+		
+
+	}
+
+}
