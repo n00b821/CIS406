@@ -1,0 +1,75 @@
+
+package interestRateCalculatorPart1;
+
+// Aaron Langley
+// CIS406 Java Programming I
+// Interest Rate Calculator Part I
+
+import java.util.Scanner;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+
+public class InterestRateCalculatorPart1 {
+
+	public static void main(String[] args) {
+		System.out.println("Welcome to the Interest Calculator");
+		
+		Scanner input = new Scanner(System.in);
+		
+		char keepGoing = 'y';
+		
+		//Continue entering inputs until user quits
+		while (keepGoing != 'n' && keepGoing != 'N') 
+		{
+			
+			System.out.println("\nEnter loan amount: ");
+			int loanAmt = input.nextInt();
+			System.out.println("Enter interest rate: ");
+			double interestRate = input.nextDouble();
+			
+			// Calculate interest amount
+			double interestAmt = interestRate/100.0 * loanAmt;
+			Locale usa = new Locale("en", "US");
+			NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(usa);
+			
+			//Output results
+			System.out.println("\nLoan amount:\t\t" + dollarFormat.format(loanAmt));
+			if ((double)(int)interestRate == interestRate) 
+			{
+				System.out.println("Interest Rate:\t\t" + (int) interestRate + "%");
+			}
+			else 
+			{
+				System.out.println("Interest Rate:\t\t" + interestRate + "%"); 
+			}
+			//System.out.println("Interest Rate:\t\t" + interestRate + "%");
+			System.out.println("Interest:\t\t" + dollarFormat.format(interestAmt));
+			
+			//Prompt user for additional inputs
+			System.out.println("\nContinue? (y/n):");
+			keepGoing = input.next().charAt(0);
+			
+		}
+		
+		System.out.println("Bye!!!");
+		input.close();
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

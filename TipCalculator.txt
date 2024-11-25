@@ -1,0 +1,50 @@
+package tipCalculator;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class TipCalculator {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+System.out.println("Tip Calculator");
+		
+		Scanner input = new Scanner(System.in);
+		
+		char keepGoing = 'y';
+		
+		//Currency converter
+		Locale usa = new Locale("en", "US");
+		NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(usa);
+		
+		//Continue entering inputs until user quits
+		while (keepGoing != 'n' && keepGoing != 'N') 
+		{
+			
+			System.out.println("\nCost of meal: ");
+			double costOfMeal = input.nextDouble();
+			
+			for (double percent = 0.15; percent < 0.30; percent += 0.05)
+			{
+				System.out.println((int)(percent * 100) + "%");
+				double tipAmount = costOfMeal * percent;			
+				System.out.println("Tip amount:\t\t" + dollarFormat.format(tipAmount));
+				double totalAmount = costOfMeal + tipAmount;			
+				System.out.println("Total amount:\t\t" + dollarFormat.format(totalAmount));
+			}
+			
+			
+			//Prompt user for additional inputs
+			System.out.println("\nContinue? (y/n):");
+			keepGoing = input.next().charAt(0);
+			
+		}
+		
+		System.out.println("Bye!!!");
+		input.close();
+
+	}
+
+}
