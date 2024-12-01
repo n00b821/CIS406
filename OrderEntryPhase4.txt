@@ -1,0 +1,191 @@
+package orderEntryPhase4;
+
+//Aaron Langley
+//CIS 406 Java Programming I
+//OrderEntryPhsae 4 Project
+
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class OrderEntryPhase4 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		// Setup local variables
+				final int MAX_ITEMS = 10; //set constant
+				String[] itemNumber = new String[MAX_ITEMS];
+				String[] itemDescription = new String[MAX_ITEMS];
+				int[] itemPrice = new int[MAX_ITEMS];
+				double[] quantityOrdered = new double[MAX_ITEMS];
+				double[] grossAmt = new double[MAX_ITEMS];
+				double[] taxPercent = new double[MAX_ITEMS];
+				double[] taxAmt = new double[MAX_ITEMS];
+				double[] discountPercent = new double[MAX_ITEMS];
+				double[] discountAmt = new double[MAX_ITEMS];
+				double[] netAmt = new double[MAX_ITEMS];
+							
+				//Continue to read in new orders
+				//Set variables for additional items
+				char moreItems = 'y';
+				String response = "?";
+				int itemCount = 0;
+				double totalGrossAmt = 0.0;
+				double totalTaxAmt = 0.0;
+				double totalDiscountAmt = 0.0;
+				double totalNetAmt = 0.0;
+				
+				//Print Order Entry Program
+				Scanner input = new Scanner(System.in);
+				
+				//Get customer data for the invoice - Phase4
+				System.out.print("Enter invoice date (MM/DD/YYYY): ");
+				String invoiceDate = input.nextLine();
+				
+				System.out.print("Enter customer name: ");
+				String customerName = input.nextLine();
+				
+				System.out.print("Enter customer street address: ");
+				String customerStreet = input.nextLine();
+				
+				System.out.print("Enter customer city: ");
+				String customerCity = input.nextLine();
+				
+				System.out.print("Enter customer state (2 chars): ");
+				String customerState = input.nextLine();
+				
+				System.out.print("Enter customer zip code (5 digits): ");
+				String customerZipCode = input.nextLine();
+				System.out.println();
+				
+				//Create while loop 
+				while (moreItems != 'n' && moreItems != 'N')
+				{
+								
+					//Catch Errors
+					try
+					{
+						System.out.print("Enter the item number: ");
+						itemNumber[itemCount] = input.nextLine();
+						
+						System.out.print("Enter the item description: ");
+						itemDescription[itemCount] = input.nextLine();
+						
+						System.out.print("Enter the item price: ");
+						itemPrice[itemCount] = input.nextInt();
+						
+						System.out.print("Enter quantity ordered: ");
+						quantityOrdered[itemCount] = input.nextDouble();
+						
+						System.out.print("Enter tax percent: ");
+						taxPercent[itemCount] = input.nextDouble();
+						
+						System.out.print("Enter discount percent: ");
+						discountPercent[itemCount] = input.nextDouble();
+						
+			
+					}
+						catch (InputMismatchException e)
+							{
+								System.out.println("Input Format Error!!");
+								e.printStackTrace();
+							}
+						catch (Exception e)
+							{
+								System.out.println("Please contact your system administrator.");
+							}
+						
+						//Setup calculations
+						grossAmt[itemCount] = itemPrice[itemCount] * quantityOrdered[itemCount];
+						taxAmt[itemCount] = grossAmt[itemCount] * taxPercent[itemCount] / 100.0;
+						grossAmt[itemCount] += taxAmt[itemCount];
+						discountAmt[itemCount] = grossAmt[itemCount] * discountPercent[itemCount] / 100.0;
+						netAmt[itemCount] = grossAmt[itemCount] - discountAmt[itemCount];
+						
+						//Update accumulator values
+						totalGrossAmt += grossAmt[itemCount];
+						totalTaxAmt += taxAmt[itemCount];
+						totalDiscountAmt += discountAmt[itemCount];
+						totalNetAmt += netAmt[itemCount];
+						
+						//Increment number of items
+						itemCount++;
+						
+						//Prompt user for additional items
+						System.out.println("Anything else you want to add? (y/n): ");
+						moreItems = input.next().charAt(0);
+						response = input.nextLine();
+						
+				}//End while loop
+				
+				//Close input
+				input.close();
+				
+				//Output headings for order item results
+				System.out.println();
+				System.out.println("Invoice Date\t" + invoiceDate + "\n");
+				System.out.println("Customer Name\t\t" + 
+								   "Customer Address\t" + 
+								   "Customer City\t\t" +
+								   "Customer State\t\t" + 		   
+								   "Customer Zip Code\t");
+				System.out.println("-------------\t\t" + 
+						           "----------------\t" + 
+						           "-------------\t\t" + 
+						           "--------------\t\t" + 
+						           "-----------------\t" );
+				System.out.println(
+						           customerName + "\t\t" + 
+						           customerStreet + "\t\t" + 
+						           customerCity + "\t\t" + 
+						           customerState + "\t\t\t" + 
+						           customerZipCode + "\t\t\n" );
+				System.out.println("Item Number\t" + 
+								   "Item Description\t" + 
+								   "Item Price\t" + 
+								   "Quantity\t" +
+								   "Gross Amt\t" + 		   
+								   "Tax %\t\t" +
+								   "Tax Amt\t\t" +
+								   "Discount %\t" + 
+								   "Discount Amt\t" + 
+						           "Net Amt");
+				System.out.println("-----------\t" + 
+						           "----------------\t" + 
+						           "----------\t" + 
+						           "--------\t" + 
+						           "---------\t" + 
+						           "------\t\t" + 
+						           "-------\t\t" + 
+						           "----------\t" + 
+						           "------------\t" + 
+						           "-------");
+				for (int i = 0; i < itemCount; i++)
+					{
+						System.out.println(itemNumber[i] + "\t\t" + 
+								           itemDescription[i] + "\t\t" + 
+								           "$" + itemPrice[i] + "\t\t" + 
+								           quantityOrdered[i] + "\t\t" + 
+								           "$" + grossAmt[i] + "\t\t" + 
+								           taxPercent[i] + "\t\t" + 
+								           "$" + taxAmt[i] + "\t\t" + 
+								           discountPercent[i] + "\t\t" + 
+								           "$" + discountAmt[i] + "\t\t" + 
+								           "$" + netAmt[i]);
+					}
+				System.out.println("\nTotals \t" + 
+								   "# of items = " + itemCount + "\t\t" + 
+						            "\t\t" + 
+						            "\t\t" + 
+						            "\t" + 
+						            "$" + totalGrossAmt + "\t\t" + 
+						            "\t\t" + 
+						            "$" + totalTaxAmt + "\t" + 
+						            "\t\t\t" + 
+						            "$" + totalDiscountAmt + "\t\t" + 
+						            "$" + totalNetAmt);
+				
+
+	}
+
+}
