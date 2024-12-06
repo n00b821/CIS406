@@ -1,0 +1,120 @@
+
+
+
+
+package interestRateCalculatorPart2;
+
+//Aaron Langley
+//CIS406 Java Programming I
+//Interest Rate Calculator Part II
+
+import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+
+public class InterestRateCalculatorPart2 
+{
+	
+	static double calcInterest(double loan, double rate) 
+	{
+		return loan * rate/100.0;
+	}
+	
+	static double getNumericData(Scanner input, String prompt) 
+	{
+		double newNumeric =  0;
+		boolean validInput = false;
+		
+		// Test for valid input and catch input errors
+		while (!validInput) 
+		{
+			validInput = true;
+			try 
+			{
+				System.out.print(prompt);
+				String inputString = input.nextLine();
+				if (inputString.contains(",")) 
+				{
+					throw new InputMismatchException("");
+				}
+				newNumeric = Double.parseDouble(inputString);
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Error. Invalid numeric value. Try again.");
+				validInput = false;
+			}
+		}
+		return newNumeric;
+	}
+	
+	// Suppress depreciation warning
+	@SuppressWarnings("deprecation")
+	
+	public static void main(String[] args) 
+	{
+		System.out.println("Welcome to the Interest Calculator");
+		
+		Scanner input = new Scanner(System.in);
+		
+		char keepGoing = 'y';
+		
+		//Continue entering inputs until user quits
+		while (keepGoing != 'n' && keepGoing != 'N') 
+		{
+			
+			//System.out.println("\nEnter loan amount: ");
+			double loanAmt = getNumericData(input, "\nEnter loan amount: ");
+			//System.out.println("Enter interest rate: ");
+			double interestRate = getNumericData(input,"Enter interest rate: ");
+			
+			// Calculate interest amount
+			double interestAmt = calcInterest(interestRate, loanAmt);
+			
+			//Suppress warning on Locale
+			Locale usa = new Locale("en", "US");
+			NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(usa);
+			
+			//Output results
+			System.out.println("\nLoan amount:\t\t" + dollarFormat.format(loanAmt));
+			if ((double)(int)interestRate == interestRate) 
+			{
+				System.out.println("Interest Rate:\t\t" + (int) interestRate + "%");
+			}
+			else 
+			{
+				System.out.println("Interest Rate:\t\t" + interestRate + "%"); 
+			}
+			//System.out.println("Interest Rate:\t\t" + interestRate + "%");
+			System.out.println("Interest:\t\t" + dollarFormat.format(interestAmt));
+			
+			//Prompt user for additional inputs
+			System.out.println("\nContinue? (y/n):");
+			keepGoing = input.next().charAt(0);
+			
+		}
+		
+		System.out.println("Bye!!!");
+		input.close();
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
