@@ -1,0 +1,46 @@
+package studentRegistration;
+
+import java.util.Scanner;
+
+
+public class StudentRegistration 
+{
+
+  public static void main(String[] args) 
+  {
+
+        // Aaron Langley
+        // CIS 406
+        // Vacation Dairy
+
+        // Print title
+        System.out.println("Vacation Diary \n");
+
+        // Enter data
+        System.out.println("Enter date vacation started (mm/dd/yyyy): ");
+        Scanner input = new Scanner(System.in);
+        String date = input.next();
+
+        System.out.println("Enter City Visited: ");
+        String cityName = input.next():
+        System.out.println("Enter Country Visited: ");
+        String countryName = input.next():
+        System.out.println("Enter number of days: ");
+        int numDays = input.nextInt():
+        System.out.println("Enter mode of travel (airplane, bus, car, ship, train): ");
+        String modeTravel = input.next():
+
+        // Display details of the trip
+        System.out.println("Date:" + date + "\n");
+        System.out.println("City:" + cityName + "\n");
+        System.out.println("Country:" + countryName + "\n");
+        System.out.println("Number of Days:" + numDays + "\n");
+        System.out.println("Traveled by:" + modeTravel + "\n");
+        System.out.println("Bye!!!");
+
+        // Close input
+        input.close();
+
+  }
+
+}
