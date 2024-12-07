@@ -1,0 +1,133 @@
+package vacationDiaryPart2;
+
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.text.Format;
+import java.util.Date;
+import java.util.InputMismatchException;
+
+public class VacationDiaryPart2 
+{
+	private static String validateDate(Scanner input, String prompt) 
+	{
+		boolean validInput = false;
+		String dateString = "";
+		String end = "end";
+		
+		while (!validInput) 
+		{
+			validInput = true;
+			try 
+			{
+				System.out.print(prompt);
+				dateString = input.nextLine();
+				if (!dateString.equals(end)) 
+				{
+					SimpleDateFormat sdFormat = new SimpleDateFormat();
+					sdFormat.setLenient(false);
+					Date javaDate = sdFormat.parse(dateString);
+					
+					if(dateString.length() != 8) 
+					{
+						throw new Exception();
+					}
+					else 
+					{
+						validInput = false;
+						return dateString;
+					}
+				}
+			}
+			catch (Exception e) 
+			{
+				System.out.println("Invalid date format. Please re-renter.");
+				validInput = false;
+			}
+			
+		}
+		return dateString;
+	}
+	
+	private static String validateCityCountry(Scanner input, String prompt) 
+	{
+		System.out.print(prompt);
+		String location = input.nextLine();
+		
+		if(location.length() > 15) 
+		{
+			for(int i = location.length(); i < 15; i++) 
+			{
+				location += "";
+			}
+			else if (location.length() > 15) 
+			{
+				location = location.substring(0, 15);
+			}
+			
+			return location;
+		}
+		
+	}
+	
+	private static String validateNumberDays(Scanner input, String prompt) 
+	{
+		boolean validInput = false;
+		int numDays = 0;
+		
+		while(!validInput) 
+		{
+			validInput = true;
+			try 
+			{
+				System.out.print(prompt);
+				numDays = input.nextInt();
+				if(numDays < 1 || numDays > 30) 
+				{
+					
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) 
+	{
+
+        // Aaron Langley
+        // CIS 406
+        // Vacation Dairy
+
+        // Print title
+        System.out.println("Vacation Diary \n");
+
+        // Enter data
+        System.out.println("Enter date vacation started (mm/dd/yyyy): ");
+        Scanner input = new Scanner(System.in);
+        String date = input.next();
+
+        System.out.println("Enter City Visited: ");
+        String cityName = input.next();
+        System.out.println("Enter Country Visited: ");
+        String countryName = input.next();
+        System.out.println("Enter number of days: ");
+        int numDays = input.nextInt();
+        System.out.println("Enter mode of travel (airplane, bus, car, ship, train): ");
+        String modeTravel = input.next();
+
+        // Display details of the trip
+        System.out.println("Date:" + date + "\n");
+        System.out.println("City:" + cityName + "\n");
+        System.out.println("Country:" + countryName + "\n");
+        System.out.println("Number of Days:" + numDays + "\n");
+        System.out.println("Traveled by:" + modeTravel + "\n");
+        System.out.println("Bye!!!");
+
+        // Close input
+        input.close();
+
+		  
+
+
+
+	}
+
+}
