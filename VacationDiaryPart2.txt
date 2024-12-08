@@ -1,8 +1,8 @@
-
-
-
-
 package vacationDiaryPart2;
+
+//Aaron Langley
+// CIS 406
+// Vacation Dairy Part II
 
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
@@ -14,13 +14,14 @@ public class VacationDiaryPart2
 {
 	private static String validateDate(Scanner input, String prompt) 
 	{
+		//Define variables
 		boolean validInput = false;
 		String dateString = "";
 		String end = "end";
 		
 		while (!validInput) 
 		{
-			validInput = true;
+			validInput = true; // Correct input is assumed
 			try 
 			{
 				System.out.print(prompt);
@@ -45,7 +46,7 @@ public class VacationDiaryPart2
 			catch (Exception e) 
 			{
 				System.out.println("Invalid date format. Please re-renter.");
-				validInput = false;
+				validInput = false; //Keep user in loop
 			}
 			
 		}
@@ -74,12 +75,13 @@ public class VacationDiaryPart2
 	
 	private static int validateNumberDays(Scanner input, String prompt) 
 	{
+		//Define variables
 		boolean validInput = false;
 		int numDays = 0;
 		
 		while(!validInput) 
 		{
-			validInput = true;
+			validInput = true; // Correct input is assumed
 			try 
 			{
 				System.out.print(prompt);
@@ -92,7 +94,7 @@ public class VacationDiaryPart2
 			catch (Exception e) 
 			{
 				System.out.println("Invalid range. Days must be between 1-30.");
-				validInput = false;
+				validInput = false; //Keep user in loop
 			}
 		}
 		return numDays;
@@ -100,12 +102,13 @@ public class VacationDiaryPart2
 	
 	private static String validateModeTravel(Scanner input, String prompt) 
 	{
+		//Define variables
 		boolean validInput = false;
 		String modeTravel = "";
 		
 		while(!validInput) 
 		{
-			validInput = true;
+			validInput = true; // Correct input is assumed
 			try 
 			{
 				System.out.print(prompt);
@@ -131,10 +134,7 @@ public class VacationDiaryPart2
 
 	public static void main(String[] args) 
 	{
-
-        // Aaron Langley
-        // CIS 406
-        // Vacation Dairy
+		//Define variables
 		int numStops = 0;
 		final int MAX_STOPS = 10;
 		String dateStarted[] = new String[MAX_STOPS];
@@ -151,7 +151,7 @@ public class VacationDiaryPart2
 		//Continue entering inputs until user quits
 		while (keepGoing != "end") 
 		{
-			String nextQuestion = "\nEnter the date your vacation started (mmddyyyy) or end to quit.";
+			String nextQuestion = "\nEnter the date your vacation started (mmddyyyy) or end to quit. ";
 			dateStarted[numStops] = validateDate(input, nextQuestion);
 			if(dateStarted[numStops].equals("end")) 
 			{
@@ -171,11 +171,10 @@ public class VacationDiaryPart2
 			numStops++;
 			
 		}
-		 // Close input
+		 // Close input and finish
         input.close();
         
-        //Header Outputs
-
+        //Line up header and column outputs
         System.out.println("=======================================================================");
         System.out.println("============================ Vacation Diary ===========================");
         System.out.println("Date\t\tCity\t\tCountry\t\tDays\t\tMode");
@@ -183,7 +182,7 @@ public class VacationDiaryPart2
         
         for (int i = 0; i < numStops; i++) 
         {
-        	   System.out.println(dateStarted + "\t" + 
+        	   System.out.println(dateStarted[i] + "\t" + 
         			   			  cityStarted[i] + "\t" + 
         			   			  countryStarted[i] + "\t" + 
         			   			  numDays[i] + "\t\t" + 
@@ -194,15 +193,3 @@ public class VacationDiaryPart2
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
